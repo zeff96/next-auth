@@ -29,4 +29,15 @@ export const registration = async(prevState: any, formData: FormData) => {
   const saltRounds = bcrypt.genSaltSync(10)
   const hashedPassword = bcrypt.hashSync(user.password, saltRounds)
 
+  const insertQuery = {
+    text: "INSERT INTO users(username, email, hashed_password) VALUES($1, $2, $3)",
+    values: [user.username, user.email, hashedPassword]
+  }
+
+  try {
+    await pool.query(insertQuery)
+  } catch (error) {
+    return {message: error}
+  }
+
 }
