@@ -24,6 +24,8 @@ export const registration = async(prevState: any, formData: FormData) => {
 
   if(selectQuery.rows.length > 0) return {message: 'Email already exist!'}
 
+  if(user.passwordConfirmation !== user.password) return {message: 'Password do not match!'}
+
   const saltRounds = bcrypt.genSaltSync(10)
   const hashedPassword = bcrypt.hashSync(user.password, saltRounds)
 
