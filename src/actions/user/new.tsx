@@ -19,5 +19,9 @@ export const registration = async(prevState: any, formData: FormData) => {
     password: formData.get('password'),
     passwordConfirmation: formData.get('password_confirmation')
   })
-  
+
+  const selectQuery = await pool.query('SELECT email FROM users WHERE email = $1', [user.email])
+
+  if(selectQuery.rows.length > 0) return {message: 'Email already exist!'}
+
 }
