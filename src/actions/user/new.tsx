@@ -24,4 +24,7 @@ export const registration = async(prevState: any, formData: FormData) => {
 
   if(selectQuery.rows.length > 0) return {message: 'Email already exist!'}
 
+  const saltRounds = bcrypt.genSaltSync(10)
+  const hashedPassword = bcrypt.hashSync(user.password, saltRounds)
+
 }
