@@ -15,7 +15,11 @@ const loginUser = async(prevState: any, formData: FormData) => {
     password: formData.get('password')
   })
 
-  const selectQuery = await pool.query('SELECT email, password FROM users WHERE email = $1', [user.email])
+  const selectQuery = await pool.query('SELECT email, hashed_password FROM users WHERE email = $1', [user.email])
 
-  if(selectQuery.rows.length === 0) return {message: 'Invalid credentials'}
+  if(selectQuery.rows.length === 0) return {message: 'Invalid credentials. Try again!'}
+
+  const success = bcrypt.compareSync(selectQuery.rows[0]['hashed_password'], user.password)
+
+  if(!success) return {message: 'Invalid credentials. Try again!'}
 }
