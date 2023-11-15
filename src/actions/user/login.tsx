@@ -38,3 +38,5 @@ const loginUser = async(prevState: any, formData: FormData) => {
     expires: Date.now() + 24 * 60 * 60 * 1000
   })
 }
+
+export default loginUser
