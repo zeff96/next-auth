@@ -9,4 +9,9 @@ const loginUser = async(prevState: any, formData: FormData) => {
     email: string(),
     password: string()
   })
+
+  const user = schema.parse({
+    email: formData.get('email'),
+    password: formData.get('password')
+  })
 }
