@@ -14,4 +14,8 @@ const loginUser = async(prevState: any, formData: FormData) => {
     email: formData.get('email'),
     password: formData.get('password')
   })
+
+  const selectQuery = await pool.query('SELECT email, password FROM users WHERE email = $1', [user.email])
+
+  if(selectQuery.rows.length === 0) return {message: 'Invalid credentials'}
 }
