@@ -22,4 +22,6 @@ const loginUser = async(prevState: any, formData: FormData) => {
   const success = bcrypt.compareSync(selectQuery.rows[0]['hashed_password'], user.password)
 
   if(!success) return {message: 'Invalid credentials. Try again!'}
+
+  await pool.query('UPDATE users SET last_login_date = $1 WHERE email = $2', [new Date, user.email])
 }
