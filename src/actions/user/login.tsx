@@ -24,4 +24,8 @@ const loginUser = async(prevState: any, formData: FormData) => {
   if(!success) return {message: 'Invalid credentials. Try again!'}
 
   await pool.query('UPDATE users SET last_login_date = $1 WHERE email = $2', [new Date, user.email])
+
+  const result = await pool.query('SELECT id, username, email FROM users WHERE email = $1', [user.email])
+
+  const token = jwt.sign({id: result.rows[0].id, username: result.rows[0].username, email: result.rows[0].email}, 'secret', {expiresIn: "1hr"})
 }
