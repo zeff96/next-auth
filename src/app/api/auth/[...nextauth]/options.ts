@@ -1,5 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from 'bcrypt'
 import { pool } from "@/db/db";
 
 export const options: NextAuthOptions = {
@@ -15,7 +16,9 @@ export const options: NextAuthOptions = {
 
         const user = result.rows[0]
 
-        if(user) {
+        const res = bcrypt.compareSync(credentials?.password, user?.password)
+
+        if(res && user) {
           return user
         }else {
           return null
