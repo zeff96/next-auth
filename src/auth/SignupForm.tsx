@@ -1,6 +1,5 @@
 "use client"
 
-import React, {useState} from "react"
 import {useFormState, useFormStatus} from "react-dom"
 import { registration } from "@/actions/user/new"
 
@@ -20,7 +19,6 @@ const SubmitButton = () => {
 
 const SignupForm = () => {
   const[state, formAction] = useFormState(registration, initialState)
-  const[show, setShow] = useState(false)
 
   return(
     <form action={formAction}>
