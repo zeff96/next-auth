@@ -1,10 +1,15 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from 'next-auth/providers/github'
 import bcrypt from 'bcrypt'
 import { pool } from "@/db/db";
 
 export const options: NextAuthOptions = {
   providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string
+    }),
     CredentialsProvider({
       name: 'Sign in with email and password',
       credentials: {
