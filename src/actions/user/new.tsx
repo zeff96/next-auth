@@ -1,4 +1,4 @@
-"user server"
+"use server"
 
 import { pool } from "@/db/db"
 import bcrypt from 'bcrypt'

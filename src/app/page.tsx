@@ -1,8 +1,9 @@
-import Image from 'next/image'
+import { SignupForm } from "@/auth/SignupForm"
 
 export default function Home() {
   return (
     <main>
+      <SignupForm />
     </main>
   )
 }
