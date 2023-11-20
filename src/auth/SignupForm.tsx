@@ -17,7 +17,7 @@ const SubmitButton = () => {
   )
 }
 
-const SignupForm = () => {
+export const SignupForm = () => {
   const[state, formAction] = useFormState(registration, initialState)
 
   return(
