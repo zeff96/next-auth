@@ -36,6 +36,7 @@ export const registration = async(prevState: any, formData: FormData) => {
 
   try {
     await pool.query(insertQuery)
+    return {message: 'User created successfully!'}
   } catch (error) {
     return {message: error}
   }
