@@ -2,8 +2,6 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
-import bcrypt from 'bcrypt'
-import { pool } from "@/db/db";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -22,13 +20,20 @@ export const options: NextAuthOptions = {
         password: {label: 'Password', type: 'password', placeholder: "Password"}
       },
       async authorize(credentials, req){
-        const result = await pool.query('SELECT id, username, email FROM users WHERE email = $1', [credentials?.email])
+        const res = await fetch('/api/login', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: credentials?.email,
+            password: credentials?.password
+          })
+        })
 
-        const user = result.rows[0]
+        const user = await res.json()
 
-        const res = bcrypt.compareSync(credentials?.password, user?.password)
-
-        if(res && user) {
+        if(user) {
           return user
         }else {
           return null
