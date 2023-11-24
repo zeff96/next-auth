@@ -1,8 +1,13 @@
 import prisma from "@/lib/prisma"
 import bcrypt from 'bcrypt'
 
+interface requestBody {
+  email: string,
+  password: string
+}
+
 export async function POST(request: Request) {
-  const body = await request.json()
+  const body: requestBody = await request.json()
 
   const user = await prisma.user.findFirst({
     where: {
