@@ -14,7 +14,7 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET as string
     }),
     CredentialsProvider({
-      name: 'Sign in with email and password',
+      name: 'credentials',
       credentials: {
         email: {label: 'Email', type: 'email', placeholder: 'Email'},
         password: {label: 'Password', type: 'password', placeholder: "Password"}
