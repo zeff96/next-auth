@@ -20,20 +20,17 @@ export const options: NextAuthOptions = {
         password: {label: 'Password', type: 'password', placeholder: "Password"}
       },
       async authorize(credentials, req){
-        const res = await fetch('/api/login', {
+        const res = await fetch('http:localhost:3000/api/login', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            email: credentials?.email,
-            password: credentials?.password
-          })
+          body: JSON.stringify(credentials)
         })
 
         const user = await res.json()
 
-        if(user) {
+        if(res.ok && user) {
           return user
         }else {
           return null
