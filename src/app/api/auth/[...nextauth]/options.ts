@@ -10,16 +10,16 @@ export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET as string
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!
     }),
     FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID as string,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
     }),
     CredentialsProvider({
       name: 'credentials',
