@@ -51,6 +51,11 @@ export const options: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60
   },
   callbacks: {
-
+    async session({token, session}) {
+      if(token) {
+        session.user.isAdmin = token.isAdmin
+      }
+      return session
+    },
   }
 }
